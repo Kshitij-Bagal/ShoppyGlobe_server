@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 8000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
-    origin: ['https://kshitij-bagal.github.io', 'https://kshitij-bagal.github.io/ShoppyGlobe/'],  // Update with your frontend URL
+    origin: ['http://localhost:5173','https://kshitij-bagal.github.io','https://kshitij-bagal.github.io/ShoppyGlobe/'],  // Update with your frontend URL
     credentials: true,
 }));
 
