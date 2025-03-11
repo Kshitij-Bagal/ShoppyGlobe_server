@@ -16,4 +16,7 @@ router.put('/', protect, updateCart);       // Update cart (e.g., change product
 // 🛒 Route to remove a product from the cart (protected)
 router.delete('/', protect, removeFromCart); // Remove product from cart (only if logged in)
 
+// 🛒 Route to clear the user's cart (protected)
+router.delete('/clear', protect, clearCart); 
+
 module.exports = router;
