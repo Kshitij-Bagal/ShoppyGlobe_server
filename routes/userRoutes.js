@@ -47,16 +47,13 @@ router.post('/register', async (req, res) => {
         const existingUser = await User.findOne({ email });
         if (existingUser) return res.status(400).json({ message: 'User already exists' });
 
-        // Hash the password
-        const hashedPassword = await bcrypt.hash(password, 10);
-
         // Create the user with default empty values for optional fields
         const user = new User({
             firstName,
             lastName,
             email,
             username,
-            password: hashedPassword,
+            password,
             phone,
             age,
             gender: gender || '',  // Default to empty if not provided
@@ -124,12 +121,10 @@ router.post('/login', async (req, res) => {
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
-
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(401).json({ message: 'Invalid credentials' });
-        }
-
+        }   
         const token = generateToken(user._id);
         res.status(200).json({ user, token });
     } catch (err) {
